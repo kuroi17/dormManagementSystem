@@ -1,65 +1,74 @@
-/*
- * 👤 MEMBER 1 - Shin
- * 
- * File: DormManagementSystem/src/model/Landlord.java
- *
- * Instructions:
- * - Replace [MEMBER 1 NAME] with your name
- * - Follow the TODO hints inside this file
- * - Fill in the blanks where indicated
- * - After finishing, run the following git commands:
- *      1. git pull
- *      2. ctrl + j (open terminal)
- *      3. git add .
- *      4. git commit -m "Add Landlord.java by [MEMBER 1 NAME]"
- *      5. git push
- * - Message the group when done! 
- *
- * Notes:
- * - This class is almost the same as Student.java
- * - You need to complete the parts marked with TODO
- */
-
 package model;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class Landlord extends Person {
+    private String landlordID;
+    private List<Dorm> ownedDorms; 
 
-    // Attributes
-    private String landlordID;    // TODO: add your attribute here
-    private List<Dorm> ownedDorms; // TODO: initialize in constructor
+    // Parameterized constructor
+    public Landlord(
+        String name,
+        String email,
+        String contactInfo,
+        String address,
+        String landlordID
+    ) {
 
-    // Constructor
-    public Landlord(String name, String email, String contactInfo, String address, String landlordID) {
-        //  (ito yung may mga this. sa unahan
-        // TODO: Call super constructor
-        // TODO: initialize landlordID
-        // TODO: initialize ownedDorms
+        super(name, contactInfo, email); // nakared linech
+        this.landlordID = landlordID;
+        this.ownedDorms = new ArrayList<>();
     }
 
-     // getters and setters po from enscapsulation lesson
     public String getLandlordID() {
-        // TODO: return landlordID
+        return landlordID;
     }
 
     public void setLandlordID(String landlordID) {
-        // TODO: set landlordID with validation if needed
+        this.landlordID = landlordID;
     }
 
     public List<Dorm> getOwnedDorms() {
-        // TODO: return the list of dorms
+        return ownedDorms;
     }
 
-    // Methods
+    public void setOwnedDorms(List<Dorm> ownedDorms) {
+        this.ownedDorms = ownedDorms;
+    }
+
     public void addDorm(Dorm dorm) {
-        // TODO: add dorm to ownedDorms (optional: check for duplicates)
+        if (dorm != null && !ownedDorms.contains(dorm)) {
+            ownedDorms.add(dorm);
+        }
     }
 
-    @Override
+    @Override 
     public String displayInfo() {
-        // TODO: override displayInfo() to show landlord info
-        // Hint: include name, ID, email, contact, number of owned dorms
-        // katulad lang nung nasa Student.java
+        return "\nName: " + getFullName() +
+               "\nLandlord ID: " + landlordID +
+               "\nOwned Dorms: " + ownedDorms.size() +
+               "\nEmail: " + getEmail() +
+               "\nContact: " + getContactNumber();
+    }
+
+    public void postDormListing(DormListing listing) {
+        System.out.println("Listing posted: " + listing.getDescription());
+    }
+
+    public void updateListing(DormListing listing, String newDesc) {
+        listing.updateDescription(newDesc);
+    }
+
+    public void deleteListing(String listingID) {
+        System.out.println("Listing deleted: " + listingID);
+    }
+
+    public void viewInquiries(List<Inquiry> inquiries) {
+        for (Inquiry inquiry : inquiries) {
+            if (inquiry.getListing().getLandlord().equals(this)) {
+                System.out.println("Inquiry: " + inquiry.getMessage());
+            }
+        }
     }
 }
