@@ -40,7 +40,7 @@ public class Landlord extends Person {
     public void addDorm(Dorm dorm) {
         if (dorm != null && !ownedDorms.contains(dorm)) {
             ownedDorms.add(dorm);
-             System.out.println("Dorm " + dorm.getDormName() + " added to " + getFullName() + "'s portfolio");
+             System.out.println("Dorm " + dorm.getDormName() + " added to " + getfullName() + "'s portfolio");
         }
     }
     public void postDormListing(DormListing listing) {
@@ -56,12 +56,12 @@ public class Landlord extends Person {
     }
 
     public void viewInquiries(List<Inquiry> inquiries) {
-        System.out.println("\n=== Inquiries for " + getFullName() + " ===");
+        System.out.println("\n=== Inquiries for " + getfullName() + " ===");
         boolean hasInquiries = false;
         for (Inquiry inquiry : inquiries) {
             if (inquiry.getListing().getLandlord().equals(this)) {
                 System.out.println("- " + inquiry.getMessage() + 
-                                 " (from: " + inquiry.getStudent().getFullName() + ")");
+                                 " (from: " + inquiry.getStudent().getfullName() + ")");
                 hasInquiries = true;
             }
         }
@@ -71,7 +71,7 @@ public class Landlord extends Person {
     }
       @Override 
     public String displayInfo() {
-        return "\nName: " + getFullName() +
+        return "\nName: " + getfullName() +
                "\nLandlord ID: " + landlordID +
                "\nOwned Dorms: " + ownedDorms.size() +
                "\nEmail: " + getEmail() +

@@ -97,12 +97,12 @@ public class Student extends Person {
         this.leaseEndDate = endDate;
         this.monthlyRent = rent;
         this.paymentStatus = "Pending";
-        System.out.println(getName() + " successfully booked room " + room.getRoomNumber());
+        System.out.println(getfullName() + " successfully booked room " + room.getRoomNumber());
     }
 
     public void vacateRoom() {
         if (currentRoom != null) {
-            System.out.println(getName() + " vacated room " + currentRoom.getRoomNumber());
+            System.out.println(getfullName() + " vacated room " + currentRoom.getRoomNumber());
         }
         this.isRenting = false;
         this.currentRoom = null;
@@ -115,30 +115,30 @@ public class Student extends Person {
     public void payRent() {
         if (isRenting) {
             this.paymentStatus = "Paid";
-            System.out.println("Payment of ₱" + String.format("%.2f", monthlyRent) + " recorded for " + getName());
+            System.out.println("Payment of ₱" + String.format("%.2f", monthlyRent) + " recorded for " + getfullName());
         } else {
-            System.out.println(getName() + " is not currently renting.");
+            System.out.println(getfullName() + " is not currently renting.");
         }
     }
 
     public void browseListings() {
-        System.out.println(getName() + " is browsing available dorm listings...");
+        System.out.println(getfullName() + " is browsing available dorm listings...");
     }
 
     public void inquireRoom(DormListing listing) {
-        System.out.println(getName() + " inquired about: " + listing.getDorm().getDormName());
+        System.out.println(getfullName() + " inquired about: " + listing.getDorm().getDormName());
     }
     // abstract method implementation from Person class
     // polymorphism: different implementation of displayInfo() method
     @Override
     public String displayInfo() {
         String info = "\n=== STUDENT INFO ===" +
-                      "\nName: " + getName() +
+                      "\nName: " + getfullName() +
                       "\nStudent ID: " + studentID +
                       "\nUniversity: " + universitySchool +
                       "\nBudget: ₱" + String.format("%.2f", budget) +
                       "\nEmail: " + getEmail() +
-                      "\nContact: " + getContactInfo() +
+                      "\nContact: " + getContactNumber() +
                       "\nAddress: " + getAddress();
         
         // Show rental info if currently renting

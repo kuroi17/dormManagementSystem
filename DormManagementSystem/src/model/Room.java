@@ -169,7 +169,7 @@ public class Room {
     }
 
     @Override
-    public String displayInfo() {
+    public String toString() {
         return "Room " + roomNumber +
                 " | Price ₱" + String.format("%.2f", pricePerMonth) + "/month" +
                 " | " + getOccupancyStatus() +

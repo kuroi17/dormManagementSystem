@@ -37,6 +37,14 @@ public class DormListing {
     }
 
     // special methods getters and setters 
+
+    public String getDescription() {
+        return "Dorm Listing: " + dorm.getDormName() + " at " + dorm.getAddress();
+    }
+    public void updateDescription(String newDesc) {
+        dorm.shortDescription = newDesc;
+    }
+
     
     public String getListingID() {
         return listingID;
@@ -107,7 +115,7 @@ public class DormListing {
         this.photos.add(photoPath);
     }
     @Override
-    public String displayInfo() {
+    public String toString() {
         return "\n=== DORM LISTING ===" +
                "\nListing ID: " + listingID +
                "\nDorm Name: " + dorm.getDormName() +
