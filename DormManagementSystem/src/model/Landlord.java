@@ -9,14 +9,14 @@ public class Landlord extends Person {
 
     // Parameterized constructor
     public Landlord(
-        String name,
+        String fullName,
         String email,
-        String contactInfo,
+        String contactNumber,
         String address,
         String landlordID
     ) {
 
-        super(name, contactInfo, email); // nakared linech
+        super(fullName, email, contactNumber, address); // from person class
         this.landlordID = landlordID;
         this.ownedDorms = new ArrayList<>();
     }
@@ -40,18 +40,9 @@ public class Landlord extends Person {
     public void addDorm(Dorm dorm) {
         if (dorm != null && !ownedDorms.contains(dorm)) {
             ownedDorms.add(dorm);
+             System.out.println("Dorm " + dorm.getDormName() + " added to " + getFullName() + "'s portfolio");
         }
     }
-
-    @Override 
-    public String displayInfo() {
-        return "\nName: " + getFullName() +
-               "\nLandlord ID: " + landlordID +
-               "\nOwned Dorms: " + ownedDorms.size() +
-               "\nEmail: " + getEmail() +
-               "\nContact: " + getContactNumber();
-    }
-
     public void postDormListing(DormListing listing) {
         System.out.println("Listing posted: " + listing.getDescription());
     }
@@ -65,10 +56,25 @@ public class Landlord extends Person {
     }
 
     public void viewInquiries(List<Inquiry> inquiries) {
+        System.out.println("\n=== Inquiries for " + getFullName() + " ===");
+        boolean hasInquiries = false;
         for (Inquiry inquiry : inquiries) {
             if (inquiry.getListing().getLandlord().equals(this)) {
-                System.out.println("Inquiry: " + inquiry.getMessage());
+                System.out.println("- " + inquiry.getMessage() + 
+                                 " (from: " + inquiry.getStudent().getFullName() + ")");
+                hasInquiries = true;
             }
         }
+        if (!hasInquiries) {
+            System.out.println("No inquiries yet.");
+        }
+    }
+      @Override 
+    public String displayInfo() {
+        return "\nName: " + getFullName() +
+               "\nLandlord ID: " + landlordID +
+               "\nOwned Dorms: " + ownedDorms.size() +
+               "\nEmail: " + getEmail() +
+               "\nContact: " + getContactNumber();
     }
 }
