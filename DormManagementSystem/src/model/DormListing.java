@@ -107,7 +107,7 @@ public class DormListing {
         this.photos.add(photoPath);
     }
     @Override
-    public String toString() {
+    public String displayInfo() {
         return "\n=== DORM LISTING ===" +
                "\nListing ID: " + listingID +
                "\nDorm Name: " + dorm.getDormName() +

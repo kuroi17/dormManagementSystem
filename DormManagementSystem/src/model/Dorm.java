@@ -67,6 +67,7 @@ import java.util.List;
     }
     
     @Override  // implementation of abstract method from Person class 
+    // POLYMORPHISM: Different implementation of displayInfo() method
     public String displayInfo(){
         return "Dorm Name: " + dormName + "\n" +
                "Address: " + address + "\n" +

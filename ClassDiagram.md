@@ -35,13 +35,13 @@
 | - fullName: String                         |  ◄─── ENCAPSULATION
 | - contactNumber: String                    |
 | - email: String                            |
-| - userID: String                           |
+| - address: String                         |
 +--------------------------------------------+
 | + displayInfo(): String (ABSTRACT)         |
 | + getFullName(): String                    |
 | + getContactNumber(): String               |
 | + getEmail(): String                       |
-| + getUserID(): String                      |
+|                                            |
 +--------------------------------------------+
            ▲                    ▲
            │                    │
@@ -52,12 +52,20 @@
 +----------------------+   +----------------------+
 | - studentID: String  |   | - landlordID: String |
 | - university: String |   | - ownedDorms: List   |
-| - budget: double     |   +----------------------+
+| - budget: double 
+isRenting: boolean
+Room currentRoom
+leaseStartDate: String
+leaseEndDate: String
+monthlyRent: String
+paymentStatus: String
+                         |   +----------------------+
 +----------------------+   | + postDormListing()  |
-| + browseRooms()      |   | + updateListing()    |
+| + browseRooms()                |   | + updateListing()    |
 | + inquireRoom()      |   | + deleteListing()    |
 | + bookRoom()         |   | + viewInquiries()    |
-| + displayInfo()      |   | + displayInfo()      |  ◄─── POLYMORPHISM
+| + displayInfo()      |   | + displayInfo()  
+                            +addDorm(Dorm dorm)    |  ◄─── POLYMORPHISM
 +----------------------+   +----------------------+
 
 +--------------------------------------------+

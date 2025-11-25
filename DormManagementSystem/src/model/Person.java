@@ -50,6 +50,7 @@ package model;
         this.address = address;
     }
  // ABSTRACTION: Abstract method for polymorphism
+ //POLYMORPHISM: Different subclasses will provide their own implementation of this method
     public abstract String displayInfo(); 
     // abstract method walang body or implementation dito sa parentg class
  }

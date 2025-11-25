@@ -128,7 +128,8 @@ public class Student extends Person {
     public void inquireRoom(DormListing listing) {
         System.out.println(getName() + " inquired about: " + listing.getDorm().getDormName());
     }
-    
+    // abstract method implementation from Person class
+    // polymorphism: different implementation of displayInfo() method
     @Override
     public String displayInfo() {
         String info = "\n=== STUDENT INFO ===" +
