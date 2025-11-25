@@ -14,7 +14,6 @@ import java.util.List;
  public class Dorm {
     private String dormName;
     private List <Room> rooms;
-    private List <Tenant> tenants;
     private String googleMapLink;
     private String address;
     public String shortDescription;
@@ -23,14 +22,12 @@ import java.util.List;
     public Dorm (
         String dormName,
         List <Room> rooms,
-        List <Tenant> tenants,
         String googleMapLink,
         String address,
         String shortDescription
     ){
         this.dormName = dormName;
         this.rooms = rooms;
-        this.tenants = tenants;
         this.googleMapLink = googleMapLink;
         this.address = address;
         this.shortDescription = shortDescription;
@@ -49,12 +46,6 @@ import java.util.List;
     }
     public void setRooms (List <Room> rooms){
         this.rooms = rooms;
-    }
-    public List <Tenant> getTenants (){
-        return tenants;
-    }
-    public void setTenants (List <Tenant> tenants){
-        this.tenants = tenants;
     }
     public String getGoogleMapLink (){
         return googleMapLink;
