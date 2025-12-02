@@ -9,6 +9,8 @@ import java.util.Scanner;
 // ========== STUDENT MENU ==========
 public class StudentMenu {
     public void start(Scanner input){
+
+
         System.out.println("\n--- STUDENT LOGIN ---");
         System.out.print("Enter your student ID: ");
         String sid = input.nextLine();
@@ -62,7 +64,70 @@ public class StudentMenu {
         }
     }
 
+    public void portal(Scanner input) {
+    boolean exitPortal = false;
+
+    while (!exitPortal) {
+        System.out.println("\n--- STUDENT PORTAL ---");
+        System.out.println("1. Login");
+        System.out.println("2. Sign Up");
+        System.out.println("3. Back");
+        System.out.print("Choice: ");
+
+        try {
+            int choice = input.nextInt();
+            input.nextLine();
+
+            switch (choice) {
+                case 1 -> start(input);  // existing login method
+                case 2 -> signUp(input);
+                case 3 -> exitPortal = true;
+                default -> System.out.println("Invalid choice!");
+            }
+        } catch (Exception e) {
+            System.out.println("Invalid input! Try again.");
+            input.nextLine();
+        }
+    }
+}
+
+
     // ========== STUDENT FUNCTIONS ==========
+
+    private void signUp(Scanner sc) {
+    System.out.println("\n--- STUDENT SIGN UP ---");
+
+    System.out.print("Full Name: ");
+    String nameInput = sc.nextLine();
+
+    System.out.print("Email: ");
+    String emailInput = sc.nextLine();
+
+    System.out.print("Phone Number: ");
+    String phoneInput = sc.nextLine();
+
+    System.out.print("Address: ");
+    String addressInput = sc.nextLine();
+
+    System.out.print("Student ID: ");
+    String studentidInput = sc.nextLine();
+
+    System.out.print("School/University: ");
+    String schoolInput = sc.nextLine();
+
+    System.out.print("Budget (Monthly): ");
+    double budgetInput = sc.nextDouble();
+    sc.nextLine();
+
+    Student newStudent = new Student(
+        nameInput, emailInput, phoneInput, addressInput, 
+        studentidInput, schoolInput, budgetInput);
+    Main.students.add(newStudent);
+
+    System.out.println("✓ Account created successfully!");
+}
+
+
 
     private void browseListing() {
         System.out.println("\n--- AVAILABLE LISTINGS ---");
@@ -82,14 +147,19 @@ public class StudentMenu {
     }
 
     private void inquireDorm(Scanner sc, Student student) {
+        System.out.println("\n---AVAILABLE LISTINGS---");
+        for (DormListing dormlisting: Main.listings){
+            System.out.println("Available Listing ID: " +
+             dormlisting.getListingID());
+        }
         try {
-            System.out.print("Enter listing ID to inquire: ");
-            String lid = sc.nextLine();
+            System.out.print("\nEnter listing ID to inquire: ");
+            String input = sc.nextLine();
             
             DormListing selected = null;
-            for (DormListing l : Main.listings) {
-                if (l.getListingID().equals(lid)) {
-                    selected = l;
+            for (DormListing dormlisting : Main.listings) {
+                if (dormlisting.getListingID().equals(input)) {
+                    selected = dormlisting;
                     break;
                 }
             }
@@ -123,15 +193,22 @@ public class StudentMenu {
     }
 
         private void bookRoom(Scanner sc, Student student) {
-        try {
-            System.out.print("Enter room number to book: ");
-            String rn = sc.nextLine();
+             System.out.println("\n---AVAILABLE ROOMS---");
+            for (DormListing dormlisting: Main.listings){
+                for (Room room : dormlisting.getDorm().getRooms()){
+                    System.out.println("Available Room Number: " +
+                     room.getRoomNumber());
+                }
+            }
+            try {
+            System.out.print("\nEnter room number to book: ");
+            String input = sc.nextLine();
             
             Room selected = null;
-            for (DormListing l : Main.listings) {
-                for (Room r : l.getDorm().getRooms()) {
-                    if (r.getRoomNumber().equals(rn)) {
-                        selected = r;
+            for (DormListing dormlisting : Main.listings) {
+                for (Room room : dormlisting.getDorm().getRooms()) {
+                    if (room.getRoomNumber().equals(input)) {
+                        selected = room;
                         break;
                     }
                 }

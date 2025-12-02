@@ -60,7 +60,60 @@ public class LandlordMenu {
             }
         }
     }
-    
+
+    public void portal(Scanner input) {
+    boolean exitPortal = false;
+
+    while (!exitPortal) {
+        System.out.println("\n--- LANDLORD PORTAL ---");
+        System.out.println("1. Login");
+        System.out.println("2. Sign Up");
+        System.out.println("3. Back");
+        System.out.print("Choice: ");
+
+        try {
+            int choice = input.nextInt();
+            input.nextLine();
+
+            switch (choice) {
+                case 1 -> start(input);  // existing login
+                case 2 -> signUp(input);
+                case 3 -> exitPortal = true;
+                default -> System.out.println("Invalid choice!");
+            }
+        } catch (Exception e) {
+            System.out.println("Invalid input! Try again.");
+            input.nextLine();
+        }
+    }
+}
+
+    // ========== LANDLORD FUNCTIONS ==========
+
+    private void signUp(Scanner sc) {
+    System.out.println("\n--- LANDLORD SIGN UP ---");
+
+    System.out.print("Full Name: ");
+    String name = sc.nextLine();
+
+    System.out.print("Email: ");
+    String email = sc.nextLine();
+
+    System.out.print("Phone Number: ");
+    String phone = sc.nextLine();
+
+    System.out.print("Address: ");
+    String address = sc.nextLine();
+
+    System.out.print("Landlord ID: ");
+    String lid = sc.nextLine();
+
+    Landlord newLandlord = new Landlord(name, email, phone, address, lid);
+    Main.landlords.add(newLandlord);
+
+    System.out.println("✓ Landlord account created successfully!");
+}
+
     private void viewLandlordDorms(Landlord landlord) {
         System.out.println("\n--- MY DORMS ---");
         List<Dorm> dorms = landlord.getOwnedDorms();

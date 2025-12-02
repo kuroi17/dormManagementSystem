@@ -23,13 +23,14 @@ public class DormMate {
             System.out.println("\nAre you a:\n1. Student\n2. Landlord\n3. Exit");
             System.out.print("Enter choice: ");
             
+            
             try {
                 int choice = input.nextInt();
                 input.nextLine(); // consume newline
 
                 switch (choice) {
-                    case 1 -> studentMenu.start(input);
-                    case 2 -> landlordMenu.start(input);
+                    case 1 -> studentMenu.portal(input);
+                    case 2 -> landlordMenu.portal(input);
                     case 3 -> {
                         exit = true;
                         System.out.println("Exiting DormMate. Goodbye!");
