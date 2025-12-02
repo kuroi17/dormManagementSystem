@@ -13,22 +13,22 @@ import util.InputValidator;
     this.fullName = fullName;
     if (InputValidator.isValidEmail(email)) {
     this.email = email;
-} else {
+    } else {
     this.email = "invalid@email.com";
-}
-if (InputValidator.isValidContact(contactNumber)) {
+    }
+    if (InputValidator.isValidContact(contactNumber)) {
     this.contactNumber = contactNumber;
-} else {
+    } else {
     this.contactNumber = "00000000000";
-}
-if (!InputValidator.isValidEmail(email)) {
+    }
+    if (!InputValidator.isValidEmail(email)) {
             InputValidator.printError("Invalid email provided: " + email);
         }
-        if (!InputValidator.isValidContact(contactNumber)) {
+    if (!InputValidator.isValidContact(contactNumber)) {
             InputValidator.printError("Invalid contact number: " + contactNumber);
-        }
+    }
     this.address = address;
- }
+}
 
 
  // gettters and setters special methods
