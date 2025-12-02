@@ -1,2 +1,18 @@
+# Project-specific files
 context.md 
 classDiagramNew.md
+ClassDiagram.md
+
+# Compiled files
+bin/
+*.class
+*.jar
+
+# IDE files
+.vscode/
+.idea/
+*.iml
+
+# OS files
+.DS_Store
+Thumbs.db           
