@@ -10,7 +10,7 @@
 
 DormMate addresses the common challenges faced by students searching for affordable accommodation near their universities and landlords trying to manage multiple properties efficiently. The system provides:
 
-- **For Students**: Browse dorm listings, filter by budget, send inquiries to landlords, book rooms, and track rental payments
+- **For Students**: Browse dorm listings, filter by budget, send inquiries to landlords, and book dorm/rooms
 - **For Landlords**: Manage multiple dorm properties, view and respond to student inquiries, track room availability and bookings
 - **Data Validation**: Input validation for emails, phone numbers, dates, and budget amounts
 - **User-Friendly Interface**: Simple menu-driven console interface for easy navigation
@@ -138,7 +138,6 @@ public abstract String displayInfo(); // Abstract Method
                     "\nLease: " + leaseStartDate + " to " + leaseEndDate +
                     "\nPayment Status: " + paymentStatus;
         }
-
         return info;
     }
 ```
@@ -317,7 +316,6 @@ cd /workspaces/dormManagementSystem/DormManagementSystem && javac -d bin src/**/
 ### Program Start
 
 ```
-✓ Sample data initialized successfully!
 === WELCOME TO DormMate! ===
 
 Are you a:
@@ -349,7 +347,7 @@ Student ID: S002
 University/School: BS Information Technology - PUP Manila
 Budget (Monthly): 8000
 
-✓ Account created successfully!
+Account created successfully!
 ```
 
 ### Student Portal - Login
@@ -369,9 +367,8 @@ Welcome, Juan Dela Cruz!
 1. Browse listings
 2. Inquire about a dorm
 3. Book a room
-4. Pay rent
-5. Display my info
-6. Logout
+4. Display my info
+5. Logout
 Choice:
 ```
 
@@ -386,14 +383,14 @@ Listing ID: LIST001
 Dorm: Sunshine Dorm
 Address: 123 Main St, Quezon City
 Available Rooms: 2
-Monthly Rate: ₱5000.0 - ₱7000.0
+Monthly Rate: (Php)5000.0 - (Php)7000.0
 Description: Affordable student housing near university
 
 Listing ID: LIST002
 Dorm: Greenview Apartments
 Address: 789 College Road, Manila
 Available Rooms: 5
-Monthly Rate: ₱6000.0 - ₱9000.0
+Monthly Rate: (Php)6000.0 - (Php)9000.0
 Description: Modern facilities with WiFi and study areas
 ```
 
@@ -412,12 +409,12 @@ Dorm: Sunshine Dorm
 Address: 123 Main St, Quezon City
 Description: Affordable student housing near university
 Available Rooms: 2
-Price Range: ₱5000.0 - ₱7000.0
+Price Range: (Php)5000.0 - (Php)7000.0
 
 Enter your message: Hello! Is the room still available? What amenities are included?
 
-✓ Inquiry sent successfully!
-✓ The landlord will respond to your inquiry soon.
+Inquiry sent successfully!
+The landlord will respond to your inquiry soon.
 ```
 
 ### Feature 3: Book a Room
@@ -433,50 +430,34 @@ Available Room Number: 201
 Enter room number to book: 101
 Enter start date (YYYY-MM-DD): 2025-01-15
 Enter end date (YYYY-MM-DD): 2025-06-15
-✓ Juan Dela Cruz successfully booked room 101
-✓ Room booked successfully!
+Juan Dela Cruz successfully booked room 101
+Room booked successfully!
 ```
 
-### Feature 4: Pay Rent
+### Feature 4: Display My Info
 
 ```
 Choice: 4
-
---- PAY RENT ---
-Current room: 101
-Monthly rent: ₱5000.00
-Current budget: ₱15000.00
-
-Do you want to pay rent? (yes/no): yes
-✓ Payment of ₱5000.00 recorded for Juan Dela Cruz
-Remaining budget: ₱10000.00
-```
-
-### Feature 5: Display My Info
-
-```
-Choice: 5
 
 === STUDENT INFO ===
 Name: Juan Dela Cruz
 Student ID: S001
 University: BSCS - UP Diliman
-Budget: ₱10000.00
+Budget: (Php)10000.00
 Email: juan@email.com
 Contact: 09123456789
 Address: 123 Student Ave, Quezon City
 
 === RENTAL INFO ===
 Room: 101
-Monthly Rent: ₱5000.00
+Monthly Rent: (Php)5000.00
 Lease: 2025-01-15 to 2025-06-15
-Payment Status: Paid
 ```
 
-### Feature 6: Logout
+### Feature 5: Logout
 
 ```
-Choice: 6
+Choice: 5
 Logged out successfully!
 
 --- STUDENT PORTAL ---
@@ -518,7 +499,7 @@ Phone Number: 09181234567
 Address: 789 Business St, Makati
 Landlord ID: L002
 
-✓ Landlord account created successfully!
+Landlord account created successfully!
 ```
 
 ### Landlord Portal - Login
@@ -577,7 +558,7 @@ Description: Spacious rooms with air conditioning and high-speed internet
 Available rooms count: 4
 Starting price: 7500
 
-✓ Dorm added successfully!
+Dorm added successfully!
 Listing ID: DL-1733097600000
 ```
 
@@ -597,7 +578,7 @@ Room Number: 301
 Capacity: 2
 Price per month: 7500
 
-✓ Room added successfully to Blue Haven Dormitory
+Room added successfully to Blue Haven Dormitory
 ```
 
 ### Feature 4: View Inquiries
@@ -638,7 +619,7 @@ Choice: 5
 Select inquiry number to respond: 1
 Your response: Yes, the room is still available! Amenities include WiFi, electricity, water, and access to common kitchen and study area.
 
-✓ Response sent to Juan Dela Cruz
+Response sent to Juan Dela Cruz
 Response: Yes, the room is still available! Amenities include WiFi, electricity, water, and access to common kitchen and study area.
 (In a real system, this would be sent via email/notification)
 ```
@@ -656,7 +637,7 @@ Room: 101
 Student: Juan Dela Cruz
 Contact: 09123456789
 Lease: 2025-01-15 to 2025-06-15
-Monthly Rent: ₱5000.0
+Monthly Rent: (Php)5000.0
 Payment Status: Paid
 
 --- Booking Details ---
@@ -665,7 +646,7 @@ Room: 201
 Student: Maria Clara Santos
 Contact: 09171234567
 Lease: 2025-02-01 to 2025-07-01
-Monthly Rent: ₱6000.0
+Monthly Rent: (Php)6000.0
 Payment Status: Pending
 ```
 
@@ -710,37 +691,37 @@ Enter choice:
 
 ```
 Enter Email: invalidemail.com
-✗ Invalid email format!
+Invalid email format!
 ```
 
 ### Invalid Phone Number
 
 ```
 Enter Phone Number: 12345
-✗ Invalid contact number format!
+Invalid contact number format!
 ```
 
 ### Invalid Date Format
 
 ```
 Enter start date (YYYY-MM-DD): 2025-13-45
-✗ Invalid start date format!
+Invalid start date format!
 ```
 
 ### Empty Message
 
 ```
 Enter your message:
-✗ Message cannot be empty!
+Message cannot be empty!
 ```
 
 ### Insufficient Budget
 
 ```
 Enter room number to book: 102
-Monthly rent: ₱7000.00
-Your budget: ₱5000.00
-✗ Insufficient budget! Need ₱7000.0 but have ₱5000.0
+Monthly rent: (Php)7000.00
+Your budget: (Php)5000.00
+Insufficient budget! Need (Php)7000.0 but have (Php)5000.0
 ```
 
 ### Student/Landlord Not Found
