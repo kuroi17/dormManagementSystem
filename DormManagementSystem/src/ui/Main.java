@@ -45,7 +45,7 @@ public class Main {
 
         Landlord landlord2 = new Landlord
         ("Ana Reyes", 
-        "ana.reyesgemail.com", 
+        "ana.reyes@gmail.com", 
         "09171234567",
         "Batangas City, Philippines",
         "LL-002");
