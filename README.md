@@ -248,19 +248,19 @@ DormManagementSystem/
 │        Student           │ │       Landlord           │
 ├──────────────────────────┤ ├──────────────────────────┤
 │ - studentID: String      │ │ - landlordID: String     │
-│ - universitySchool: String│ │ - ownedDorms: List<Dorm>│
+│ - universitySchool:String│ │ - ownedDorms: List<Dorm> │
 │ - budget: double         │ │                          │
 │ - isRenting: boolean     │ │                          │
 │ - currentRoom: Room      │ │                          │
 │ - leaseStartDate: String │ │                          │
 │ - leaseEndDate: String   │ │                          │
 │ - monthlyRent: double    │ │                          │
-│ - paymentStatus: String  │ │                          │
+│                          │ │                          │
 ├──────────────────────────┤ ├──────────────────────────┤
 │ + getStudentID(): String │ │ + getLandlordID(): String│
 │ + getBudget(): double    │ │ + getOwnedDorms(): List  │
 │ + isRenting(): boolean   │ │ + addDorm(Dorm): void    │
-│ + getCurrentRoom(): Room │ │ + viewInquiries(List): void│
+│ + getCurrentRoom(): Room │ │ + viewInquiries(List):void│
 │ + bookRoom(): void       │ │ + postDormListing(): void│
 │ + vacateRoom(): void     │ │ + updateListing(): void  │
 │ + browseListings(): void │ │ + deleteListing(): void  │
@@ -942,6 +942,9 @@ Julianne Antoinette Deduque
 
     - Implements Data Storage for progress saving.
 
+6. **Smoother Program Flow**
+
+    - Better and consistent control flow of the program.
 ---
 
 ## 📚 References

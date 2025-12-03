@@ -3,12 +3,15 @@ package service;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+import ui.Main;
+
 public class DormMate {
 
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
         
         // Initialize data from Main class
+         Main.initializeData();
         StudentMenu studentMenu = new StudentMenu();
         LandlordMenu landlordMenu = new LandlordMenu();
         

@@ -13,7 +13,6 @@ public class Student extends Person {
     private String leaseStartDate;
     private String leaseEndDate;
     private double monthlyRent;
-    private String paymentStatus;
 
     public Student(
         String fullName,
@@ -35,7 +34,7 @@ public class Student extends Person {
         // initialize rental state
         this.isRenting = false;
         this.currentRoom = null;
-        this.paymentStatus = "N/A";
+   
     }
 
     // use special methods known as getters and setters from enscapsulation
@@ -90,14 +89,6 @@ public class Student extends Person {
         return monthlyRent;
     }
 
-    public String getPaymentStatus() {
-        return paymentStatus;
-    }
-
-    public void setPaymentStatus(String paymentStatus) {
-        this.paymentStatus = paymentStatus;
-    }
-
     // methods for booking/vacating
     public void bookRoom(Room room, String startDate, String endDate, double rent) {
         
@@ -117,7 +108,7 @@ public class Student extends Person {
         }
          // Validate budget
         if (this.budget < rent) {
-            InputValidator.printError("Insufficient budget! Need (Php)" + rent + " but have (Php)" + this.budget);
+            InputValidator.printError("Insufficient budget! Need  ₱" + rent + " but have  ₱" + this.budget);
             return;
         }
         
@@ -127,7 +118,8 @@ public class Student extends Person {
         this.leaseStartDate = startDate;
         this.leaseEndDate = endDate;
         this.monthlyRent = rent;
-        this.paymentStatus = "Pending";
+
+
         System.out.println(getfullName() + " successfully booked the room " + room.getRoomNumber());
     }
 
@@ -140,7 +132,6 @@ public class Student extends Person {
         this.leaseStartDate = null;
         this.leaseEndDate = null;
         this.monthlyRent = 0;
-        this.paymentStatus = "N/A";
     }
 
     public void browseListings() {
@@ -158,7 +149,7 @@ public class Student extends Person {
                       "\nName: " + getfullName() +
                       "\nStudent ID: " + studentID +
                       "\nUniversity: " + universitySchool +
-                      "\nBudget: (Php)" + String.format("%.2f", budget) +
+                      "\nBudget:  ₱" + String.format("%.2f", budget) +
                       "\nEmail: " + getEmail() +
                       "\nContact: " + getContactNumber() +
                       "\nAddress: " + getAddress();
@@ -167,9 +158,8 @@ public class Student extends Person {
         if (isRenting && currentRoom != null) {
             info += "\n\n=== RENTAL INFO ===" +
                     "\nRoom: " + currentRoom.getRoomNumber() +
-                    "\nMonthly Rent: (Php)" + String.format("%.2f", monthlyRent) +
-                    "\nLease: " + leaseStartDate + " to " + leaseEndDate +
-                    "\nPayment Status: " + paymentStatus;
+                    "\nMonthly Rent:  ₱" + String.format("%.2f", monthlyRent) +
+                    "\nLease: " + leaseStartDate + " to " + leaseEndDate;
         }
         return info;
     }

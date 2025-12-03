@@ -21,7 +21,7 @@ public class Main {
         "Manila, Philippines",
         "2021-12345",
         "Batangas State University", 
-        5000.0);
+        5000);
 
         Student student2 = new Student(
         "Maria Santos", 
@@ -30,7 +30,7 @@ public class Main {
         "Quezon City, Philippines", 
         "2021-67890", 
         "University of the Philippines", 
-        7000.0);
+        7000);
 
         students.add(student1);
         students.add(student2);
@@ -53,9 +53,9 @@ public class Main {
         landlords.add(landlord2);
 
         // Sample rooms
-        Room room1 = new Room("101", 2, 3000.0);
-        Room room2 = new Room("102", 4, 5000.0);
-        Room room3 = new Room("201", 2, 3500.0);
+        Room room1 = new Room("101", 2, 3000.00);
+        Room room2 = new Room("102", 4, 5000.00);
+        Room room3 = new Room("201", 2, 3500.00);
 
         // Sample dorms
         List<Room> rooms1 = new ArrayList<>();
@@ -90,14 +90,14 @@ public class Main {
                 landlord1,
                 "2025-11-26",
                 2,
-                3000.0);
+                3000.00);
         DormListing listing2 = new DormListing(
                 "DL-002",
                 dorm2, 
                 landlord2, 
                 "2025-11-26",
                 1,
-                3500.0);
+                3500.00);
                 
         listings.add(listing1);
         listings.add(listing2);

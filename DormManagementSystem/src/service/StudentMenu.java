@@ -133,15 +133,23 @@ public class StudentMenu {
             return;
         }
         
-        for (DormListing l : Main.listings) {
-            System.out.println("\nListing ID: " + l.getListingID());
-            System.out.println("Dorm: " + l.getDorm().getDormName());
-            System.out.println("Address: " + l.getDorm().getAddress());
-            System.out.println("Available Rooms: " + l.getAvailableRooms());
-            System.out.println("Monthly Rate: (Php)" + l.getPriceRange());
-            System.out.println("Description: " + l.getDorm().getShortDescription());
+        for (DormListing dormListing : Main.listings) {
+            System.out.println("\nListing ID: " + dormListing.getListingID());
+            System.out.println("Dorm: " + dormListing.getDorm().getDormName());
+            System.out.println("Address: " + dormListing.getDorm().getAddress());
+            System.out.println("Available Rooms: " + dormListing.getAvailableRooms());
+            System.out.println("Monthly Rate:  ₱" + dormListing.getPriceRange());
+            System.out.println("Description: " + dormListing.getDorm().getShortDescription());
+        
+            System.out.print("Available Room: ");
+            for (Room room: dormListing.getDorm().getRooms()){
+            System.out.print(room.getRoomNumber() + " ");
+            }
+            System.out.println();
         }
-    }
+        }
+
+       
 
     private void inquireDorm(Scanner sc, Student student) {
         System.out.println("\n---AVAILABLE DORM LISTINGS---");
@@ -189,60 +197,93 @@ public class StudentMenu {
         }
     }
 
-        private void bookRoom(Scanner sc, Student student) {
-             System.out.println("\n---AVAILABLE ROOMS---");
-            for (DormListing dormlisting: Main.listings){
-                for (Room room : dormlisting.getDorm().getRooms()){
-                    System.out.println("Available Room Number: " +
-                     room.getRoomNumber());
-                }
-            }
-            try {
-            System.out.print("\nEnter room number to rent: ");
-            String input = sc.nextLine();
-            
-            Room selected = null;
-            for (DormListing dormlisting : Main.listings) {
-                for (Room room : dormlisting.getDorm().getRooms()) {
-                    if (room.getRoomNumber().equals(input)) {
-                        selected = room;
-                        break;
-                    }
-                }
-                if (selected != null) break;
-            }
-            
-            if (selected == null) {
-                InputValidator.printError("Room not found!");
-                return;
-            }
-            
-            if (!selected.isAvailable()) {
-                InputValidator.printError("Room is not available!");
-                return;
-            }
-            
-            System.out.print("Enter start date (YYYY-MM-DD): ");
-            String startDate = sc.nextLine();
-            
-            if (!InputValidator.isValidDate(startDate)) {
-                InputValidator.printError("Invalid start date format!");
-                return;
-            }
-            
-            System.out.print("Enter end date (YYYY-MM-DD): ");
-            String endDate = sc.nextLine();
-            
-            if (!InputValidator.isValidDate(endDate)) {
-                InputValidator.printError("Invalid end date format!");
-                return;
-            }
-            
-            student.bookRoom(selected, startDate, endDate, selected.getPricePerMonth());
-            System.out.println("Room booked successfully!");
-            
-        } catch (Exception e) {
-            System.out.println("Booking failed: " + e.getMessage());
+    private void bookRoom(Scanner sc, Student student) {
+    try {
+        System.out.println("\n--- RENT A ROOM ---");
+        
+        if (Main.listings.isEmpty()) {
+            System.out.println("No dorms available.");
+            return;
         }
+        
+        // Step 1: Display dorms with numbers
+        System.out.println("\n--- AVAILABLE DORMS ---");
+        for (int i = 0; i < Main.listings.size(); i++) {
+            DormListing listing = Main.listings.get(i);
+            System.out.println((i + 1) + ". " + listing.getDorm().getDormName() + 
+                             " - " + listing.getDorm().getAddress());
+        }
+        
+        // Step 2: User selects dorm by number
+        System.out.print("Select dorm (1-" + Main.listings.size() + "): ");
+        int dormChoice = sc.nextInt();
+        sc.nextLine();
+        
+        if (dormChoice < 1 || dormChoice > Main.listings.size()) {
+            InputValidator.printError("Invalid dorm selection!");
+            return;
+        }
+        
+        Dorm selectedDorm = Main.listings.get(dormChoice - 1).getDorm();
+        
+        // Step 3: Display rooms in selected dorm
+        System.out.println("\n--- Rooms in " + selectedDorm.getDormName() + " ---");
+        for (int i = 0; i < selectedDorm.getRooms().size(); i++) {
+            Room room = selectedDorm.getRooms().get(i);
+            String status = room.isAvailable() ? "Available" : "Full";
+            System.out.println((i + 1) + ". Room " + room.getRoomNumber() + 
+                             " - ₱" + room.getPricePerMonth() + "/month - " + status);
+        }
+        
+        // Step 4: User selects room by number
+        if (selectedDorm.getRooms().size() > 1){
+             System.out.print("Select room (1-" + selectedDorm.getRooms().size() + "): ");
+        }
+        else{
+             System.out.print("Select room (1): ");
+        }
+       
+        int roomChoice = sc.nextInt();
+        sc.nextLine();
+        
+        if (roomChoice < 1 || roomChoice > selectedDorm.getRooms().size()) {
+            InputValidator.printError("Invalid room selection!");
+            return;
+        }
+        
+        Room selectedRoom = selectedDorm.getRooms().get(roomChoice - 1);
+        
+        if (!selectedRoom.isAvailable()) {
+            InputValidator.printError("Room is not available!");
+            return;
+        }
+        
+        // Step 5: Get dates
+        System.out.print("\nEnter start date (YYYY-MM-DD): ");
+        String startDate = sc.nextLine();
+        
+        if (!InputValidator.isValidDate(startDate)) {
+            InputValidator.printError("Invalid date format!");
+            return;
+        }
+        
+        System.out.print("Enter end date (YYYY-MM-DD): ");
+        String endDate = sc.nextLine();
+        
+        if (!InputValidator.isValidDate(endDate)) {
+            InputValidator.printError("Invalid date format!");
+            return;
+        }
+        
+        // Step 6: Book
+        student.bookRoom(selectedRoom, startDate, endDate, selectedRoom.getPricePerMonth());
+        System.out.println("✓ Room booked successfully!");
+        
+    } catch (InputMismatchException e) {
+        System.out.println("✗ Please enter a valid number!");
+        sc.nextLine();
+    } catch (Exception e) {
+        System.out.println("✗ Booking failed: " + e.getMessage());
     }
+}
 }

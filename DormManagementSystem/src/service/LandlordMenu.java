@@ -346,7 +346,7 @@ public class LandlordMenu {
                             System.out.println("Student: " + student.getfullName());
                             System.out.println("Contact: " + student.getContactNumber());
                             System.out.println("Lease: " + student.getLeaseStartDate() + " to " + student.getLeaseEndDate());
-                            System.out.println("Monthly Rent: (Php)" + student.getMonthlyRent());
+                            System.out.println("Monthly Rent:  ₱" + student.getMonthlyRent());
                         }
                     }
                 }

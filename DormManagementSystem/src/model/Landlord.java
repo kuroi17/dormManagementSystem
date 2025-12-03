@@ -70,6 +70,7 @@ public class Landlord extends Person {
     }
       @Override 
     public String displayInfo() {
+        System.out.println("\n=== Landlord Information ===");
         return "\nName: " + getfullName() +
                "\nLandlord ID: " + landlordID +
                "\nOwned Dorms: " + ownedDorms.size() +
