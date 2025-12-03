@@ -34,7 +34,7 @@ public class StudentMenu {
             System.out.println("\n--- STUDENT MENU ---");
             System.out.println("1. Browse listings");
             System.out.println("2. Inquire about a dorm");
-            System.out.println("3. Book a room");
+            System.out.println("3. Rent a room");
             System.out.println("4. Display info");
             System.out.println("5. Logout");
             System.out.print("Choice: ");
@@ -198,7 +198,7 @@ public class StudentMenu {
                 }
             }
             try {
-            System.out.print("\nEnter room number to book: ");
+            System.out.print("\nEnter room number to rent: ");
             String input = sc.nextLine();
             
             Room selected = null;

@@ -1,10 +1,8 @@
 package model;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Room implements Serializable {
-    private static final long serialVersionUID = 1L;
+public class Room {
     private String roomNumber;
     private int capacity;
     private int occupiedCount;

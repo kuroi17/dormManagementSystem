@@ -1,10 +1,7 @@
 package model;
-import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
- public class Dorm implements Serializable {
-    private static final long serialVersionUID = 1L;
+ public class Dorm {
     // instance variable
     private String dormName;
     private List <Room> rooms;

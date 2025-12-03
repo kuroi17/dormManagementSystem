@@ -1,11 +1,8 @@
 package model;
-
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Landlord extends Person implements Serializable {
-    private static final long serialVersionUID = 1L;
+public class Landlord extends Person {
     private String landlordID;
     private List<Dorm> ownedDorms; 
 

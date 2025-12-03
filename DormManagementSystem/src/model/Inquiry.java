@@ -1,9 +1,6 @@
 package model;
 
-import java.io.Serializable;
-
-public class Inquiry implements Serializable {
-private static final long serialVersionUID = 1L;
+public class Inquiry {
     // Attributes
     private String inquiryID;         // Unique identifier for the inquiry
     private Student student;          // Student who made the inquiry

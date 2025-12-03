@@ -1,9 +1,6 @@
 package service;
 
-import util.DataStorage;
-import util.InputValidator;
 import java.util.InputMismatchException;
-import ui.Main;
 import java.util.Scanner;
 
 public class DormMate {
@@ -11,7 +8,6 @@ public class DormMate {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
         
-        DataStorage.load();
         // Initialize data from Main class
         StudentMenu studentMenu = new StudentMenu();
         LandlordMenu landlordMenu = new LandlordMenu();
@@ -45,7 +41,6 @@ public class DormMate {
             }
         }
         input.close();
-        DataStorage.save();
     }   
 }
 class AsciiArt {

@@ -1,10 +1,7 @@
 package model;
-import java.io.Serializable;
-
 import util.InputValidator;
 
- public abstract class Person implements Serializable{
-    private static final long serialVersionUID = 1L;
+ public abstract class Person {
     private String fullName;
     private String email;
     private String contactNumber;
