@@ -5,123 +5,88 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.*;
-import ui.Main;  // Import for initializeData
+import ui.Main;
 
 public class DataStorage {
 
     private static final String FILE_NAME = "database.dat";
 
-    // Central storage lists
-    public static List<Dorm> dorms = new ArrayList<>();
-    public static List<DormListing> listings = new ArrayList<>();
-    public static List<Landlord> landlords = new ArrayList<>();
-    public static List<Student> students = new ArrayList<>();
-    public static List<Inquiry> inquiries = new ArrayList<>();
-    public static List<Room> rooms = new ArrayList<>();
-    public static List<Person> person = new ArrayList<>();
+    public static class Database implements Serializable {
+        private static final long serialVersionUID = 1L;
 
-    // ID trackers (optional, for auto-incrementing)
+        private List<Dorm> dorms = new ArrayList<>();
+        private List<DormListing> listings = new ArrayList<>();
+        private List<Landlord> landlords = new ArrayList<>();
+        private List<Student> students = new ArrayList<>();
+        private List<Inquiry> inquiries = new ArrayList<>();
+        private List<Room> rooms = new ArrayList<>();
+        private List<Person> persons = new ArrayList<>();
+
+        public List<Dorm> getDorms() { return dorms; }
+        public List<DormListing> getListings() { return listings; }
+        public List<Landlord> getLandlords() { return landlords; }
+        public List<Student> getStudents() { return students; }
+        public List<Inquiry> getInquiries() { return inquiries; }
+        public List<Room> getRooms() { return rooms; }
+        public List<Person> getPersons() { return persons; }
+
+        public void setDorms(List<Dorm> dorms) { this.dorms = dorms; }
+        public void setListings(List<DormListing> listings) { this.listings = listings; }
+        public void setLandlords(List<Landlord> landlords) { this.landlords = landlords; }
+        public void setStudents(List<Student> students) { this.students = students; }
+        public void setInquiries(List<Inquiry> inquiries) { this.inquiries = inquiries; }
+        public void setRooms(List<Room> rooms) { this.rooms = rooms; }
+        public void setPersons(List<Person> persons) { this.persons = persons; }
+    }
+
+    private static Database db = new Database();
     private static int nextStudentId = 1;
-    // Add similar for other entities if needed (e.g., nextLandlordId, nextDormId)
 
     public static int getNextStudentId() {
         return nextStudentId++;
     }
 
-    // Wrapper to store everything together
-    private static class Database implements Serializable {
-        private static final long serialVersionUID = 1L;
-
-        List<Dorm> dorms;
-        List<DormListing> listings;
-        List<Landlord> landlords;
-        List<Student> students;
-        List<Inquiry> inquiries;
-        List<Room> rooms;
-        List<Person> person;
+    public static Database getDatabase() {
+        return db;
     }
 
-    // Save all data into file
     public static void save() {
-        try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(FILE_NAME))) {
-
-            Database data = new Database();
-            data.dorms = dorms;
-            data.listings = listings;
-            data.landlords = landlords;
-            data.students = students;
-            data.inquiries = inquiries;
-            data.rooms = rooms;
-            data.person = person;
-
-            out.writeObject(data);
-            System.out.println("Data saved successfully.");
-
+        File file = new File(FILE_NAME);
+        try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(file))) {
+            out.writeObject(db);
         } catch (IOException e) {
-            System.out.println("Saving Error: " + e.getMessage());
+            e.printStackTrace();
         }
     }
 
-    // Load all data from file
     public static void load() {
         File file = new File(FILE_NAME);
+
         if (!file.exists()) {
-            System.out.println("ℹ No previous data found. Starting with empty database.");
-            // Initialize sample data since no file exists
             Main.initializeData();
             return;
         }
 
-        try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(FILE_NAME))) {
-
-            Database data = (Database) in.readObject();
-
-            // Safely assign lists, initializing to empty if null
-            dorms = data.dorms != null ? data.dorms : new ArrayList<>();
-            listings = data.listings != null ? data.listings : new ArrayList<>();
-            landlords = data.landlords != null ? data.landlords : new ArrayList<>();
-            students = data.students != null ? data.students : new ArrayList<>();
-            inquiries = data.inquiries != null ? data.inquiries : new ArrayList<>();
-            rooms = data.rooms != null ? data.rooms : new ArrayList<>();
-            person = data.person != null ? data.person : new ArrayList<>();
-
-            // Update ID trackers based on loaded data to avoid conflicts
+        try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(file))) {
+            db = (Database) in.readObject();
             updateIdTrackers();
-
-            // If no students were loaded, initialize sample data
-            if (students.isEmpty()) {
-                Main.initializeData();
-            }
-
-            System.out.println("Data loaded successfully.");
-
         } catch (Exception e) {
-            System.out.println("Loading Error: " + e.getMessage() + ". Starting with empty database.");
-            // Initialize empty lists on failure and add sample data
-            dorms = new ArrayList<>();
-            listings = new ArrayList<>();
-            landlords = new ArrayList<>();
-            students = new ArrayList<>();
-            inquiries = new ArrayList<>();
-            rooms = new ArrayList<>();
-            person = new ArrayList<>();
+            e.printStackTrace();
+            db = new Database();
             Main.initializeData();
         }
     }
 
-    // Helper method to update ID trackers from loaded data
     private static void updateIdTrackers() {
-        // Update nextStudentId
-        int maxStudentId = 0;
-        for (Student s : students) {
+        int maxId = 0;
+
+        for (Student s : db.getStudents()) {
             try {
-                // Assuming ID format like "S001" - extract the number
                 int idNum = Integer.parseInt(s.getStudentID().substring(1));
-                if (idNum > maxStudentId) maxStudentId = idNum;
-            } catch (NumberFormatException | StringIndexOutOfBoundsException ex) {
-                // Skip invalid IDs
-            }
+                if (idNum > maxId) maxId = idNum;
+            } catch (Exception ignored) {}
         }
-        nextStudentId = maxStudentId + 1;
+
+        nextStudentId = maxId + 1;
     }
 }

@@ -815,6 +815,10 @@ Julianne Antoinette Deduque
    - Develop JavaFX or Swing-based graphical interface
    - Improve user experience with visual elements
 
+5. **Implementing Data Storage**
+
+    - Implements Data Storage for progress saving.
+
 ---
 
 ## 📚 References
